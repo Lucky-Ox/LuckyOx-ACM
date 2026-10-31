@@ -1,0 +1,27 @@
+# IDE settings
+.idea/
+.vscode/
+
+# CMake build output
+cmake-build-*/
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Compiled files
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.pdb
+
+# Local secrets
+.env
+.env.*
+!.env.example
