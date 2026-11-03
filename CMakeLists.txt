@@ -23,5 +23,7 @@ foreach(source_file ${CPP_SOURCES})
     endif()
 
     # Build one selected problem; do not compile the entire collection by default.
-    add_executable("${target_name}" EXCLUDE_FROM_ALL "${source_file}")
+    add_executable("${target_name}" EXCLUDE_FROM_ALL "${source_file}"
+            "LeetCode/2. 两数相加.cpp"
+            "LeetCode/3. 无重复字符的最长子串.cpp")
 endforeach()
