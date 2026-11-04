@@ -23,7 +23,17 @@ foreach(source_file ${CPP_SOURCES})
     endif()
 
     # Build one selected problem; do not compile the entire collection by default.
-    add_executable("${target_name}" EXCLUDE_FROM_ALL "${source_file}"
-            "LeetCode/2. 两数相加.cpp"
-            "LeetCode/3. 无重复字符的最长子串.cpp")
+    # NOTE: sources are auto-collected by file(GLOB) above -- never append file names here.
+    # If CLion offers "Add to CMake target" when creating a file, decline it:
+    # anything added below is inserted inside this foreach() and therefore lands in EVERY target.
+    add_executable("${target_name}" EXCLUDE_FROM_ALL "${source_file}")
+
+    # Guard against tooling (e.g. CLion's "Add to CMake target") appending sources inside this loop.
+    get_target_property(_actual_sources "${target_name}" SOURCES)
+    if(NOT _actual_sources STREQUAL source_file)
+        message(WARNING
+                "Target '${target_name}' got unexpected extra sources: ${_actual_sources}\n"
+                "Remove those file names from add_executable() inside the foreach() loop in CMakeLists.txt "
+                "-- new .cpp files are picked up automatically by file(GLOB).")
+    endif()
 endforeach()
